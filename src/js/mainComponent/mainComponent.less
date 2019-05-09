@@ -1,0 +1,41 @@
+@headerHeight: 80px;
+@footerHeight: 100px;
+
+.page-wrapper {
+  height: 100vh;
+  display: flex;
+  flex-direction: column;
+
+  &__header {
+    display: flex;
+    height: @headerHeight;
+    border-bottom: 1px solid black;
+    box-sizing: border-box;
+  }
+
+  &__footer {
+    display: flex;
+    height: @footerHeight;
+  }
+
+  &__content {
+    flex: 1;
+    display: flex;
+  }
+}
+
+.content {
+  &__sidebar {
+    width: 60px;
+    background-color: blue;
+    border-bottom: 1px solid black;
+    border-right: 1px solid black;
+    box-sizing: border-box;
+  }
+
+  &__chat {
+    flex: 1;
+    background-color: grey;
+    border-bottom: 1px solid black;
+  }
+}
