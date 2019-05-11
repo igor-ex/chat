@@ -1,5 +1,5 @@
 import { takeEvery, put, call, take } from 'redux-saga/effects';
-import { eventChannel } from 'redux-saga';
+import { eventChannel, END } from 'redux-saga';
 import constants from '../../constants/constants';
 import * as actions from './actions';
 
@@ -41,6 +41,7 @@ function* initConnection() {
             const eventAction = yield take(channel);
             yield put(eventAction);
         } else {
+            console.log('ending in else');
             channel = yield new Promise((resolve) => {
                 setTimeout(() => {
                     createWebSocket();
@@ -48,6 +49,7 @@ function* initConnection() {
                 }, 1000);
             });
         }
+
     }
 }
 
@@ -60,6 +62,8 @@ export function createWebSocket() {
         };
 
         ws.onclose = () => {
+            emitter(END);
+            console.log('ending');
             emitter(actions.setStatus('DISCONNECTED'));
         };
 
@@ -73,13 +77,8 @@ export function createWebSocket() {
                     emitter(actions.messageHistoryReceived(data.content));
                     break;
                 case 'user_list':
-                    emitter(actions.x);
-                    break;
-                case 'user_came':
-                    emitter(actions.x);
-                    break;
-                case 'user_left':
-                    emitter(actions.x);
+                    //emitter(actions.x);
+                    console.log(data, 'user list from server');
                     break;
                 default:
                     console.log('unfamiliar message was received from server');
@@ -97,4 +96,5 @@ export function createWebSocket() {
 export function closeWs() {
     channel.close();
     channel = null;
+
 }

@@ -6,7 +6,7 @@ export default class Header extends PureComponent {
     render() {
         return (
             <div className="header">
-                <h1>HEADER</h1>
+                <h1><a href="http://localhost:3000">HEADER</a></h1>
             </div>
         );
     }

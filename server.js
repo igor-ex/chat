@@ -7,7 +7,7 @@ const usersArray = [];
 const users = new Map();
 const mTypes = Object.freeze({
     new_message: 'new_message',
-
+    user_list: 'user_list'
 });
 
 function sendToAllArray(rawData, excluding) {
@@ -25,6 +25,7 @@ function sendToAllArray(rawData, excluding) {
 
 function sendToAll(rawData, excluding) {
     console.log(users.size, 'users size');
+    console.log(rawData);
     if (!users.size) {
         return;
     }
@@ -37,6 +38,17 @@ function sendToAll(rawData, excluding) {
     }
 }
 
+function sendUserList() {
+    const userNames = [];
+    for (let [key, value] of users) {
+        userNames.push(value);
+    }
+    sendToAll({
+        mType: mTypes.user_list,
+        content: userNames
+    });
+}
+
 server.on('connection', ws => {
     const userName = 'user_' + userCounter++;
     usersArray.push({userName, ws});
@@ -45,11 +57,26 @@ server.on('connection', ws => {
         mType: mTypes.new_message,
         content: {text: 'Привет от сервера!'}
     }));
+    sendUserList();
+    ws.on('message', text => {
+        sendToAll({
+            mType: mTypes.new_message,
+            content: {user: 'system', text:'пользователь ' + userName + ' подключился'}
+        }, ws);
+    });
 
     ws.on('message', text => {
         sendToAll({
             mType: mTypes.new_message,
             content: {user: users.get(ws), text}
+        }, ws);
+    });
+
+    ws.on('close', text => {
+        sendUserList();
+        sendToAll({
+            mType: mTypes.new_message,
+            content: {user: 'system', text: 'пользователь ' + userName + ' покинул нас'}
         }, ws);
     });
 });
