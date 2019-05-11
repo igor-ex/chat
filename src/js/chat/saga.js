@@ -9,28 +9,50 @@ let channel = null;
 export default function* watchChatSaga() {
     yield takeEvery(constants.INIT_CONNECTION, initConnection);
     yield takeEvery(constants.TOGGLE_CHAT_MODULE, toggleChatModule);
-    yield takeEvery(constants.SEND_MESSAGE, sendMessage)
 }
 
 function* toggleChatModule() {
     yield put(actions.toggleChatModuleStore());
 }
 
-function* initConnection() {
-    channel = yield call(createWebSocket);
-
-    while(channel) {
-        const eventAction = yield take(channel);
-        yield put(eventAction);
+function* emitMessageWorker (action) {
+    yield put(actions.messageReceived('', action.payload));
+    if (channel && ws) {
+        try {
+            yield ws.send(action.payload);
+        } catch (err) {
+            if (err.name === 'InvalidStateError') {
+                console.log('сообщение сейчас отправить нельзя. Сокет плохой');
+            } else {
+                throw (err);
+            }
+        }
+    } else {
+        console.log('message can\'t be send because socket is dysfunctional');
     }
 }
 
-function* sendMessage(action){
-    yield put();
+function* initConnection() {
+    yield takeEvery(constants.EMIT_MESSAGE, emitMessageWorker);
+    channel = yield call(createWebSocket);
+
+    while(true) {
+        if (channel) {
+            const eventAction = yield take(channel);
+            yield put(eventAction);
+        } else {
+            channel = yield new Promise((resolve) => {
+                setTimeout(() => {
+                    createWebSocket();
+                    resolve();
+                }, 1000);
+            });
+        }
+    }
 }
 
 export function createWebSocket() {
-    ws = new WebSocket('ws://localhost:3000');
+    ws = new WebSocket('ws://localhost:4000');
 
     return eventChannel(emitter => {
         ws.onopen = () => {
@@ -42,8 +64,27 @@ export function createWebSocket() {
         };
 
         ws.onmessage = response => {
-            const data = JSON.parse(response.data).text;
-            emitter(actions.showChatMessage(data));
+            const data = JSON.parse(response.data);
+            switch(data.mType){
+                case 'new_message':
+                    emitter(actions.messageReceived(data.content.user, data.content.text));
+                    break;
+                case 'message_history':
+                    emitter(actions.messageHistoryReceived(data.content));
+                    break;
+                case 'user_list':
+                    emitter(actions.x);
+                    break;
+                case 'user_came':
+                    emitter(actions.x);
+                    break;
+                case 'user_left':
+                    emitter(actions.x);
+                    break;
+                default:
+                    console.log('unfamiliar message was received from server');
+            }
+
             console.log(data);
         };
 

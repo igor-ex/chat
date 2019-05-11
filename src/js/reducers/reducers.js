@@ -14,14 +14,35 @@ const usersReducer = (state = users, action) => {
     }
 };
 
-const messages = [];
+const messages = {
+    currentMessage: '',
+    messages: []
+};
 
 const messageReducer = (state = messages, action) => {
     switch (action.type) {
-        case constants.SHOW_CHAT_MESSAGE: return {
-            ...state,
-            action.payload
-        };
+        case constants.MESSAGE_RECEIVED:
+            //debugger;
+            return {
+                ...state,
+                messages: [
+                    ...state.messages,
+                    action.payload
+                ]
+            };
+        case constants.MESSAGE_HISTORY_RECEIVED:
+            return {
+                ...state,
+                messages: [
+                    action.payload,
+                    ...state.messages
+                ]
+            };
+        case constants.SET_CURRENT_MESSAGE:
+            return {
+                ...state,
+                currentMessage: action.payload
+            };
         default:
             return state
     }
@@ -51,7 +72,7 @@ const configReducer = (state = config, action) => {
 };
 
 export default combineReducers({
-    users: usersReducer,
     config: configReducer,
+    users: usersReducer,
     messages: messageReducer
 });

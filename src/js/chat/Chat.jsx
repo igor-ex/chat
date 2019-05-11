@@ -1,6 +1,9 @@
+
+
 import React from 'react';
 import PureComponent from '../../base/pureComponent/PureComponent.jsx';
 import './chat.less';
+import MessageBlock from "./components/messagesBlock/index.jsx";
 
 export default class Chat extends PureComponent {
     render() {
@@ -8,14 +11,14 @@ export default class Chat extends PureComponent {
             status,
             toggleChatModule,
             currentMessage,
-            sendMessage
+            sendMessage,
         } = this.props;
 
         return (
             <div className="chat">
                 <h1>{status}</h1>
                 <button className="button-close" onClick={toggleChatModule}>X</button>
-                <input value={currentMessage} onChange={sendMessage}/>
+                <MessageBlock/>
             </div>
         );
     }
