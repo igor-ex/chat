@@ -2,13 +2,17 @@ import config from '../../config/config';
 import { combineReducers } from 'redux';
 import constants from '../../constants/constants';
 
-const users = [];
+const users = {
+    users: []
+};
 
 const usersReducer = (state = users, action) => {
     switch (action.type) {
-        case "ADD_USER": return {
-            // ToDo create logic of adding new user
-        };
+        case constants.USER_LIST_RECEIVED:
+            return {
+                ...state,
+                users: action.payload
+            };
         default:
             return state
     }
@@ -34,7 +38,7 @@ const messageReducer = (state = messages, action) => {
             return {
                 ...state,
                 messages: [
-                    action.payload,
+                    ...action.payload,
                     ...state.messages
                 ]
             };

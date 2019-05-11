@@ -33,10 +33,11 @@ export default class MessageBlock extends Component {
         return (
             <>
                 {mElems}
-                <input value={currentMessage}
+                <textarea value={currentMessage}
                        onChange={this.setCurrentMessage}
                        onKeyUp={this.emitMessage}
                        autoFocus
+                          className="chat__input"
                 />
             </>
         );

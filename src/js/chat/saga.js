@@ -73,18 +73,16 @@ export function createWebSocket() {
                 case 'new_message':
                     emitter(actions.messageReceived(data.content.user, data.content.text));
                     break;
-                case 'message_history':
+                case 'message_list':
                     emitter(actions.messageHistoryReceived(data.content));
                     break;
                 case 'user_list':
-                    //emitter(actions.x);
-                    console.log(data, 'user list from server');
+                    emitter(actions.userListReceived(data.content));
                     break;
                 default:
                     console.log('unfamiliar message was received from server');
             }
 
-            console.log(data);
         };
 
         return () => {
