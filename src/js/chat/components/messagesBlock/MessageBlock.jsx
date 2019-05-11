@@ -4,9 +4,10 @@ import './message-block.less';
 export default class MessageBlock extends Component {
     emitMessage = (ev) => {
         const text = ev.target.value;
-        if (text.trim() === '' || ev.key !== 'Enter') {
+        if (text.trim() === '' || ev.key !== 'Enter' || ev.shiftKey) {
             return;
         }
+        //.replace(/(?:\r\n|\r|\n)/g, '<br>')
         this.props.emitMessage(text);
         this.props.setCurrentMessage('');
     };
