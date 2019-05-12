@@ -16,6 +16,37 @@ export default class MessageBlock extends Component {
         this.props.setCurrentMessage(text);
     };
 
+    componentDidMount() {
+        this.ref = React.createRef();
+    }
+
+    getSnapshotBeforeUpdate(){
+        let flag = false;
+        if (this.ref === null || this.ref.current === null) {
+            return null;
+        }
+        const el = this.ref.current;
+        if (el.scrollHeight - el.scrollTop > el.clientHeight) {
+            flag = true;
+            console.log(flag);
+            console.log(el.scrollHeight - el.scrollTop);
+            return flag;
+        }
+        return null;
+    }
+
+    componentDidUpdate(a, b, flag) {
+        if (this.ref === null || this.ref.current === null) {
+            return;
+        }
+        const el = this.ref.current;
+        window.el = el;
+        if (flag) {
+            return;
+        }
+        el.scrollTop = el.scrollHeight + 100;
+    }
+
     render() {
         const {
             messages,
@@ -33,7 +64,7 @@ export default class MessageBlock extends Component {
         });
         return (
             <>
-                {mElems}
+                <div className="chat__messages" ref={this.ref}>{mElems}</div>
                 <textarea value={currentMessage}
                        onChange={this.setCurrentMessage}
                        onKeyUp={this.emitMessage}

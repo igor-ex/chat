@@ -1,8 +1,17 @@
 
-.chat__message {
-  display: flex;
-}
-.chat__input {
-  width: 100%;
-  height: 100px;
+.chat {
+
+  &__message {
+    display: flex;
+  }
+
+  &__input {
+    width: 100%;
+    height: 100px;
+  }
+
+  &__messages {
+    flex: 1;
+    overflow-y: auto;
+  }
 }
