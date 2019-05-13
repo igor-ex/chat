@@ -13,6 +13,10 @@ const mTypes = Object.freeze({
     user_list: 'user_list',
     message_list: 'message_list'
 });
+const clientMTypes = Object.freeze({
+    message: 'message',
+    user_name: 'user_name'
+});
 
 function sendToAllArray(rawData, excluding) {
     if (!users.length) {
@@ -58,8 +62,7 @@ function addMessage(message) {
     }
 }
 
-function connectionCallback(ws) {
-    const userName = 'user_' + userCounter++;
+function connectionCallback(ws, userName) {
     usersArray.push({userName, ws});
     users.set(ws, userName);
     ws.send(JSON.stringify({
@@ -81,25 +84,38 @@ function connectionCallback(ws) {
 }
 
 server.on('connection', ws => {
-    const userName = connectionCallback(ws);
+    let userName;
+    ws.on('message', rawData => {
+        const data = JSON.parse(rawData);
+        if (!users.has(ws) && data.mType !== clientMTypes.user_name) {
+            return;
+        }
+        switch (data.mType) {
+            case clientMTypes.user_name:
+                userName = data.content;
+                connectionCallback(ws, userName);
+                ws.on('close', text => {
+                    users.delete(ws);
+                    sendUserList();
+                    const message = {user: 'system', text: 'пользователь ' + userName + ' покинул нас'};
+                    addMessage(message);
+                    sendToAll({
+                        mType: mTypes.new_message,
+                        content: message
+                    }, ws);
+                });
+                break;
+            case clientMTypes.message:
+                const message = {user: users.get(ws), text: data.content};
+                addMessage(message);
+                sendToAll({
+                    mType: mTypes.new_message,
+                    content: message
+                }, ws);
+                break;
+            default:
+                console.log('unfamiliar clientMType');
+        }
 
-    ws.on('message', text => {
-        const message = {user: users.get(ws), text};
-        addMessage(message);
-        sendToAll({
-            mType: mTypes.new_message,
-            content: message
-        }, ws);
-    });
-
-    ws.on('close', text => {
-        users.delete(ws);
-        sendUserList();
-        const message = {user: 'system', text: 'пользователь ' + userName + ' покинул нас'};
-        addMessage(message);
-        sendToAll({
-            mType: mTypes.new_message,
-            content: message
-        }, ws);
     });
 });

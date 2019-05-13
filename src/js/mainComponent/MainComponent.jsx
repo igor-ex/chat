@@ -9,7 +9,8 @@ import './mainComponent.less';
 export default class MainComponent extends PureComponent {
     constructor(props) {
         super(props);
-        this.props.initConnection();
+        //this.props.initConnection();
+        this.props.emitUserName('Igor_' + Math.random());
     }
 
     render() {

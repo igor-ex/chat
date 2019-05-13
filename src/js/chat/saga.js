@@ -1,14 +1,19 @@
-import { takeEvery, put, call, take } from 'redux-saga/effects';
+import { takeEvery, put, call, take, delay, fork } from 'redux-saga/effects';
 import { eventChannel, END } from 'redux-saga';
 import constants from '../../constants/constants';
 import * as actions from './actions';
 
 let ws = null;
 let channel = null;
+let userName = null;
 
 export default function* watchChatSaga() {
-    yield takeEvery(constants.INIT_CONNECTION, initConnection);
     yield takeEvery(constants.TOGGLE_CHAT_MODULE, toggleChatModule);
+    ({userName} = yield take(constants.EMIT_USER_NAME));
+    console.log('im here after name');
+    //yield takeEvery(constants.INIT_CONNECTION, initConnection);
+    yield fork(initConnection);
+    console.log('after init connection');
 }
 
 function* toggleChatModule() {
@@ -20,7 +25,7 @@ function* emitMessageWorker (action) {
     yield put(actions.messageReceived('', text));
     if (channel && ws) {
         try {
-            yield ws.send(text);
+            yield ws.send(JSON.stringify({mType: 'message', content: text}));
         } catch (err) {
             if (err.name === 'InvalidStateError') {
                 console.log('сообщение сейчас отправить нельзя. Сокет плохой');
@@ -39,34 +44,39 @@ function* initConnection() {
     channel = yield call(createWebSocket);
 
     while(true) {
-        if (channel) {
-            const eventAction = yield take(channel);
-            yield put(eventAction);
-        } else {
-            console.log('ending in else');
-            channel = yield new Promise((resolve) => {
-                setTimeout(() => {
-                    createWebSocket();
-                    resolve();
-                }, 1000);
-            });
+        try {
+            channel = yield call(createWebSocket);
+            console.log('in try after channel yield')
+            while (true) {
+                const eventAction = yield take(channel);
+                console.log('in while');
+                yield put(eventAction);
+            }
+        } finally {
+            console.log('ending in finally');
+            yield delay(1000);
         }
 
     }
 }
 
 export function createWebSocket() {
-    ws = new WebSocket('ws://localhost:4000');
+        ws = new WebSocket('ws://localhost:4000');
+        console.log('after new websocket');
 
     return eventChannel(emitter => {
         ws.onopen = () => {
             emitter(actions.setStatus('ONLINE'));
+            console.log('before onopen');
+            console.log(userName, 'username before send it to server');
+            ws.send(JSON.stringify({mType: 'user_name', content: userName}));
+            console.log('after onopen');
         };
 
         ws.onclose = () => {
-            //emitter(END);
-            console.log('ending');
             emitter(actions.setStatus('DISCONNECTED'));
+            console.log('ending');
+            //emitter(END);
             console.log('im here');
             //setInterval(() => emitter({type: constants.INIT_CONNECTION}), 1000);
         };
@@ -96,7 +106,7 @@ export function createWebSocket() {
 }
 
 export function closeWs() {
-    channel.close();
+    //channel.close();
     channel = null;
 
 }

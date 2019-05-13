@@ -9,6 +9,7 @@ const mapStateToProps = state => ({
 
 const mapDispatchToProps = dispatch => ({
     initConnection: () => dispatch(actions.innitConnection()),
+    emitUserName: (userName) => dispatch(actions.emitUserName(userName))
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);
