@@ -68,12 +68,15 @@ export default class MessageBlock extends Component {
         return (
             <>
                 <div className="chat__messages" ref={this.ref}>{mElems}</div>
+                <div className="text">
                 <textarea value={currentMessage}
                        onChange={this.setCurrentMessage}
                        onKeyUp={this.emitMessage}
                        autoFocus
                           className="chat__input"
                 />
+                <button className="chat__button">Send</button>
+                </div>
             </>
         );
     }

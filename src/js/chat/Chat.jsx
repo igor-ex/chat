@@ -16,8 +16,10 @@ export default class Chat extends PureComponent {
 
         return (
             <div className="chat">
+                <div className="status">
                 <h1>{status}</h1>
                 <button className="button-close" onClick={toggleChatModule}>X</button>
+                </div>
                 <MessageBlock/>
             </div>
         );

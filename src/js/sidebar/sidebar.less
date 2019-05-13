@@ -5,4 +5,39 @@
 .button-sidebar {
   width: 100%;
   height: 30px;
+  display: block;
+  position: relative;
+  border: none;
+  font: inherit;
+  color: #ffffff;
+  background-color: transparent;
+  box-shadow: 0 0 40px rgba(0,0,0,.5);
+  cursor: pointer;
+  overflow: hidden;
+}
+.button-sidebar:before{
+  content: '';
+  position: absolute;
+  width: 100%;
+  height: 100%;
+  top: 0;
+  left: -100%;
+  background: #ffffff;
+  transition: 0.5s;
+  transition-delay: 0.5s;
+}
+.button-sidebar:hover:before{
+  left: 100%;
+}
+.sidebar__user{
+  font-size: 24px;
+  text-align: center;
+  padding-top: 15px;
+  margin-top: 10px;
+  color: #ffffff;
+  margin-left: 3px;
+  margin-right: 3px;
+  height: 50px;
+  border: 1px solid green;
+  border-radius: 10px;
 }
