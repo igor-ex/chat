@@ -16,10 +16,11 @@ function* toggleChatModule() {
 }
 
 function* emitMessageWorker (action) {
-    yield put(actions.messageReceived('', action.payload));
+    const text = action.payload.trim();
+    yield put(actions.messageReceived('', text));
     if (channel && ws) {
         try {
-            yield ws.send(action.payload);
+            yield ws.send(text);
         } catch (err) {
             if (err.name === 'InvalidStateError') {
                 console.log('сообщение сейчас отправить нельзя. Сокет плохой');
@@ -33,6 +34,7 @@ function* emitMessageWorker (action) {
 }
 
 function* initConnection() {
+    console.log('initConnection?');
     yield takeEvery(constants.EMIT_MESSAGE, emitMessageWorker);
     channel = yield call(createWebSocket);
 
@@ -62,9 +64,11 @@ export function createWebSocket() {
         };
 
         ws.onclose = () => {
-            emitter(END);
+            //emitter(END);
             console.log('ending');
             emitter(actions.setStatus('DISCONNECTED'));
+            console.log('im here');
+            //setInterval(() => emitter({type: constants.INIT_CONNECTION}), 1000);
         };
 
         ws.onmessage = response => {

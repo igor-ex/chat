@@ -53,12 +53,15 @@ export default class MessageBlock extends Component {
             currentMessage
         }
             = this.props;
+        let prevUser = null;
         const mElems = messages.map((item, index) => {
-            const user = item.user ? <div>{item.user}: </div> : null;
+            const userNameClass = 'chat__user-name ' + (prevUser !== null && item.user === prevUser ? 'chat__user-name_hidden' : 'chat__user-name');
+            prevUser = item.user;
+            const user = item.user ? <div className={userNameClass}>{item.user}: </div> : null;
             return (
                 <div key={index} className="chat__message">
                     {user}
-                    <div>{item.text}</div>
+                    <div className="chat__message-text">{item.text}</div>
                 </div>
             );
         });
