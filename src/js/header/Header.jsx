@@ -14,6 +14,7 @@ export default class Header extends PureComponent {
                     <span></span>
                     <span></span>
                 </a>
+                <div className="header__h2">{this.props.userName ? "Hello, " + this.props.userName : "Hello"}</div>
             </div>
         );
     }

@@ -2,14 +2,27 @@ import React, {Component} from 'react';
 import './message-block.less';
 
 export default class MessageBlock extends Component {
-    emitMessage = (ev) => {
-        const text = ev.target.value;
-        if (text.trim() === '' || ev.key !== 'Enter' || ev.shiftKey) {
+
+    commitInput = (text) => {
+        if (text.trim() === '') {
             return;
         }
         this.props.emitMessage(text);
         this.props.setCurrentMessage('');
     };
+
+    handleInput = (ev) => {
+        const text = ev.target.value;
+        if (ev.key !== 'Enter' || ev.shiftKey) {
+            return;
+        }
+        this.commitInput(text);
+    };
+
+    handleEnterButton = () => {
+        this.commitInput(this.props.currentMessage);
+    };
+
     setCurrentMessage = (ev) => {
         const text = ev.target.value;
         this.props.setCurrentMessage(text);
@@ -75,11 +88,11 @@ export default class MessageBlock extends Component {
                 <div className="text">
                 <textarea value={currentMessage}
                        onChange={this.setCurrentMessage}
-                       onKeyUp={this.emitMessage}
+                       onKeyUp={this.handleInput}
                        autoFocus
                           className="chat__input"
                 />
-                <button className="chat__button">Send</button>
+                <button className="chat__button" onClick={this.handleEnterButton}>Send</button>
                 </div>
             </>
         );

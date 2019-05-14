@@ -13,32 +13,29 @@ export default class MainComponent extends PureComponent {
         //this.props.initConnection();
         //this.props.emitUserName('Igor_' + Math.random());
     }
-
+    logInputRef = React.createRef();
     state = {
-        logState: false
+        logState: false,
+        msg: ''
     };
 
     changeLogState = (ev) => {
-        const authLog = document.getElementById("authLog");
+        const authLog = this.logInputRef.current;
         const userName = authLog.value.trim();
         if (userName !== ""){
-            this.setState({logState : true});
+            this.setState({logState : true, userName : authLog.value});
             this.props.emitUserName(userName);
         }
         else {
             authLog.value = '';
-            this.renderMsg("Please, enter your login");
+            this.setState(state => {
+                return {
+                    ...state,
+                    msg: "Please, enter your login"
+                }
+            });
         }
     };
-
-    renderMsg = (msg) => {
-        const msgBox = document.getElementById("msgBox");
-        if (msg) {
-            msgBox.innerText = msg;
-        } else {
-            msgBox.innerText = '';
-        }
-    }
 
     render() {
         const {
@@ -49,12 +46,13 @@ export default class MainComponent extends PureComponent {
         return (
             <div className="page-wrapper">
                 <header className="page-wrapper__header">
-                    {modules.header.isExisted && <Header/>}
+                    {!this.state.logState ? modules.header.isExisted && <Header/> : modules.header.isExisted && <Header userName = {this.state.userName} />}
                 </header>
                 <main className="page-wrapper__content content">
                     <div className="content__sidebar">
                         {modules.sidebar.isExisted && <Sidebar/>}
-                    </div>{!this.state.logState ? <Login changeLogState = {this.changeLogState}/> : blocksActive.chat ?
+                    </div>
+                    {!this.state.logState ? <Login logInputRef = {this.logInputRef} changeLogState = {this.changeLogState} msg={this.state.msg}/> : blocksActive.chat ?
                     <div className="content__chat">
                         {modules.chat.isExisted && <Chat/>}
                     </div> : null
