@@ -23,7 +23,7 @@ export default class MainComponent extends PureComponent {
         const authLog = this.logInputRef.current;
         const userName = authLog.value.trim();
         if (userName !== ""){
-            this.setState({logState : true, userName : authLog.value});
+            this.setState({logState : true, userName : authLog.value, msg: ''});
             this.props.emitUserName(userName);
         }
         else {
@@ -46,13 +46,22 @@ export default class MainComponent extends PureComponent {
         return (
             <div className="page-wrapper">
                 <header className="page-wrapper__header">
-                    {!this.state.logState ? modules.header.isExisted && <Header/> : modules.header.isExisted && <Header userName = {this.state.userName} />}
+                    {!this.state.logState ?
+                        modules.header.isExisted &&
+                        <Header/> :
+                        modules.header.isExisted &&
+                        <Header userName = {this.state.userName} />}
                 </header>
                 <main className="page-wrapper__content content">
                     <div className="content__sidebar">
                         {modules.sidebar.isExisted && <Sidebar/>}
                     </div>
-                    {!this.state.logState ? <Login logInputRef = {this.logInputRef} changeLogState = {this.changeLogState} msg={this.state.msg}/> : blocksActive.chat ?
+                    {!this.state.logState ?
+                        <Login
+                            logInputRef = {this.logInputRef}
+                            changeLogState = {this.changeLogState}
+                            msg={this.state.msg}/> :
+                        blocksActive.chat ?
                     <div className="content__chat">
                         {modules.chat.isExisted && <Chat/>}
                     </div> : null

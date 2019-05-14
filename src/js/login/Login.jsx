@@ -13,7 +13,6 @@ export default class Login extends React.Component{
 
     render(){
         const authLogin = this.props.logInputRef;
-        const logMsgBoxRef = this.props.logMsgBoxRef;
         const msg = this.props.msg;
         console.log("PROPS_LOG",this.props.logInputRef);
         return (

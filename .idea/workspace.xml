@@ -2,11 +2,9 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="7ece3b42-3ab4-440f-bc09-3940e1ca6197" name="Default Changelist" comment="">
-      <change beforePath="$PROJECT_DIR$/src/js/chat/components/messagesBlock/MessageBlock.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/chat/components/messagesBlock/MessageBlock.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/header/Header.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/header/Header.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/header/header.less" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/header/header.less" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/server.js" beforeDir="false" afterPath="$PROJECT_DIR$/server.js" afterDir="false" />
+      <change beforePath="$PROJECT_DIR$/src/js/footer/Footer.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/footer/Footer.jsx" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/src/js/login/Login.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/login/Login.jsx" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/src/js/mainComponent/MainComponent.jsx" beforeDir="false" afterPath="$PROJECT_DIR$/src/js/mainComponent/MainComponent.jsx" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -73,22 +71,10 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="true">
+      <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/src/js/login/Login.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="243">
-              <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
-              <folding>
-                <element signature="e#0#26#0" expanded="true" />
-              </folding>
-            </state>
-          </provider>
-        </entry>
-      </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/js/footer/Footer.jsx">
-          <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="334">
+            <state relative-caret-position="216">
               <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
               <folding>
                 <element signature="e#0#26#0" expanded="true" />
@@ -97,11 +83,23 @@
           </provider>
         </entry>
       </file>
-      <file pinned="false" current-in-tab="false">
-        <entry file="file://$PROJECT_DIR$/src/config/config.js">
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://$PROJECT_DIR$/src/js/footer/Footer.jsx">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="459">
-              <caret line="17" column="18" selection-start-line="17" selection-start-column="7" selection-end-line="17" selection-end-column="18" />
+            <state relative-caret-position="442">
+              <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
+              <folding>
+                <element signature="e#0#26#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/server.js">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="205">
+              <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
             </state>
           </provider>
         </entry>
@@ -151,6 +149,7 @@
       <find>initConnection</find>
       <find>cathcing</find>
       <find>ending</find>
+      <find>привет</find>
     </findStrings>
     <replaceStrings>
       <replace>&lt;br/&gt;</replace>
@@ -184,19 +183,19 @@
         <option value="$PROJECT_DIR$/src/js/chat/components/messagesBlock/message-block.less" />
         <option value="$PROJECT_DIR$/src/constants/constants.js" />
         <option value="$PROJECT_DIR$/src/js/mainComponent/actions.js" />
-        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/src/js/chat/saga.js" />
         <option value="$PROJECT_DIR$/src/js/mainComponent/index.jsx" />
-        <option value="$PROJECT_DIR$/src/js/footer/Footer.jsx" />
         <option value="$PROJECT_DIR$/src/js/chat/components/messagesBlock/MessageBlock.jsx" />
         <option value="$PROJECT_DIR$/src/js/header/Header.jsx" />
         <option value="$PROJECT_DIR$/src/js/header/header.less" />
         <option value="$PROJECT_DIR$/src/js/mainComponent/MainComponent.jsx" />
+        <option value="$PROJECT_DIR$/server.js" />
         <option value="$PROJECT_DIR$/src/js/login/Login.jsx" />
+        <option value="$PROJECT_DIR$/src/js/footer/Footer.jsx" />
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="7">
+  <component name="ProjectFrameBounds" extendedState="6">
     <option name="x" value="121" />
     <option name="y" value="48" />
     <option name="width" value="716" />
@@ -354,12 +353,12 @@
       <option name="presentableId" value="Default" />
       <updated>1557414718906</updated>
       <workItem from="1557414722599" duration="4385000" />
-      <workItem from="1557438238761" duration="81662000" />
+      <workItem from="1557438238761" duration="82194000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="86047000" />
+    <option name="totallyTimeSpent" value="86579000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-8" y="-8" width="1616" height="876" extended-state="6" />
@@ -583,13 +582,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/server.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="2592">
-          <caret line="96" column="40" selection-start-line="96" selection-start-column="40" selection-end-line="96" selection-end-column="40" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/chat/actions.js">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="135">
@@ -650,16 +642,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/src/js/footer/Footer.jsx">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="334">
-          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
-          <folding>
-            <element signature="e#0#26#0" expanded="true" />
-          </folding>
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/chat/components/messagesBlock/MessageBlock.jsx">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="432">
@@ -704,10 +686,27 @@
         </state>
       </provider>
     </entry>
+    <entry file="file://$PROJECT_DIR$/server.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="205">
+          <caret line="69" column="34" selection-start-line="69" selection-start-column="34" selection-end-line="69" selection-end-column="34" />
+        </state>
+      </provider>
+    </entry>
     <entry file="file://$PROJECT_DIR$/src/js/login/Login.jsx">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="243">
-          <caret line="21" column="25" selection-start-line="21" selection-start-column="25" selection-end-line="21" selection-end-column="25" />
+        <state relative-caret-position="216">
+          <caret line="14" column="49" selection-start-line="14" selection-start-column="49" selection-end-line="14" selection-end-column="49" />
+          <folding>
+            <element signature="e#0#26#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/src/js/footer/Footer.jsx">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="442">
+          <caret line="18" column="37" selection-start-line="18" selection-start-column="37" selection-end-line="18" selection-end-column="37" />
           <folding>
             <element signature="e#0#26#0" expanded="true" />
           </folding>

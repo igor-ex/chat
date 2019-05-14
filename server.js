@@ -67,7 +67,7 @@ function connectionCallback(ws, userName) {
     users.set(ws, userName);
     ws.send(JSON.stringify({
         mType: mTypes.new_message,
-        content: {text: 'Привет от сервера!'}
+        content: {user: 'system', text: 'Привет от сервера!'}
     }));
     ws.send(JSON.stringify({
         mType: mTypes.message_list,
