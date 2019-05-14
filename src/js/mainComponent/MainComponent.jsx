@@ -20,14 +20,13 @@ export default class MainComponent extends PureComponent {
 
     changeLogState = (ev) => {
         const authLog = document.getElementById("authLog");
-        const userName = authLog.value;
+        const userName = authLog.value.trim();
         if (userName !== ""){
             this.setState({logState : true});
             this.props.emitUserName(userName);
         }
         else {
             this.renderMsg("Please, enter your login");
-            this.props.emitUserName(authLog.value);
         }
     };
 
