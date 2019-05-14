@@ -19,7 +19,7 @@ export default class Header extends PureComponent {
                 <button
                     className="header-settings_button"
                     onClick = { this.props.toggleSettingsModule }
-                    children={"Settings"}
+
                 />
                 <Settings />
             </div>

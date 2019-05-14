@@ -102,3 +102,25 @@
 .header__h2 {
   color: white;
 }
+
+.header-settings_button {
+   right: 1em;
+   top: 0.5em;
+   position: absolute;
+   font-size: 2em;
+   color: #FFFFFF;
+   background: none;
+   border: none;
+   outline: 0;
+  cursor: pointer;
+
+  &:hover {
+    color: rgba(255,255,255,0.9);
+  }
+
+  &::before {
+    font-family: "FontAwesome";
+    font-weight: 900;
+    content: "\f013";
+  }
+ }
