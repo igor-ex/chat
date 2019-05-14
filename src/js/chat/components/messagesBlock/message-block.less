@@ -3,6 +3,29 @@
 
   &__message {
     display: flex;
+    flex-direction: column;
+
+    &:last-child {
+      margin-bottom: 10px;
+    }
+
+    &_mine {
+      align-items: flex-end;
+      .chat__message-text{
+        box-shadow: -6px 3px -3px 0px rgba(0,0,0,0.75);
+        border-radius: 10px 0px 10px 10px;
+        border: 1px solid #000000;
+      }
+    }
+
+    &_others {
+      align-items: flex-start;
+      .chat__message-text{
+        box-shadow: 6px -3px 3px 0px rgba(0,0,0,0.75);
+        border-radius: 0px 10px 10px 10px;
+        border: 1px solid #000000;
+      }
+    }
   }
 
   &__message-text {
@@ -16,10 +39,6 @@
     font-weight: bold;
     color: #020931;
     font-size: 24px;
-  }
-
-  &__user-name_hidden {
-    visibility: hidden;
   }
 
   &__input {
@@ -40,5 +59,6 @@
   &__messages {
     flex: 1;
     overflow-y: auto;
+    padding-left: 10px;
   }
 }
