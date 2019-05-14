@@ -7,7 +7,6 @@ export default class MessageBlock extends Component {
         if (text.trim() === '' || ev.key !== 'Enter' || ev.shiftKey) {
             return;
         }
-        //.replace(/(?:\r\n|\r|\n)/g, '<br>')
         this.props.emitMessage(text);
         this.props.setCurrentMessage('');
     };
