@@ -1,0 +1,90 @@
+body {
+    background-color: #483D8B;
+}
+
+.authorization-form {
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    margin-top: -150px;
+    margin-left: -200px;
+    background-color: #FFFFFF;
+    border-radius: 10px;
+    width: 400px;
+    height: 180px;
+}
+
+.msgBox {
+    top: 100px;
+    left: 40px;
+    position: absolute;
+    padding: 0 1em;
+    color: #ff0000;
+}
+
+.authorization-form__header {
+    color: #00BFFF;
+    font-family: Arial;
+    font-weight: bold;
+    font-size: 20px;
+    position: absolute;
+    left: 140px;
+    top: 25px;
+}
+
+.authorization-form__input-login {
+    outline: none;
+    background-size: auto 50%;
+    padding-left: 15px;
+    border: #CCCCCC;
+    border-radius: 20px;
+    background-color: #CCCCCC;
+    color: #555555;
+    font-size: 14px;
+    position: absolute;
+    left: 40px;
+    top: 65px;
+    width: 305px;
+    height: 30px;
+}
+
+
+.authorization-form__confirm-button {
+    outline: none;
+    border: #00BFFF;
+    border-radius: 20px;
+    background-color: #00BFFF;
+    color: #FFFFFF;
+    font-size: 14px;
+    position: absolute;
+    left: 260px;
+    top: 120px;
+    width: 100px;
+    height: 30px;
+    font-weight: bold;
+    text-align: center;
+}
+
+.authorization-form__registration-button {
+    border: #00BFFF;
+    border-radius: 20px;
+    background-color: #00BFFF;
+    color: #FFFFFF;
+    position: absolute;
+    left: 40px;
+    top: 200px;
+    font-family: Arial;
+    font-size: 14px;
+    font-weight: bold;
+    width: 100px;
+    height: 30px;
+    text-align: center;
+}
+
+.authorization-form__input-email:focus {
+    background-color: burlywood
+}
+
+.authorization-form__input-password:focus {
+    background-color: burlywood
+}
