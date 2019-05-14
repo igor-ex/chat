@@ -7,7 +7,7 @@ const mapStateToProps = state => ({
 });
 
 const mapDispatchToProps = dispatch => ({
-    toggleChatModule: () => dispatch(actions.toggleChatModule()),
+
 });
 
 export default connect(mapStateToProps, mapDispatchToProps)(Component);

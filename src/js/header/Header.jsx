@@ -16,6 +16,11 @@ export default class Header extends PureComponent {
                     <span></span>
                 </a>
                 <div className="header__h2">{this.props.userName ? "Hello, " + this.props.userName : "Hello"}</div>
+                <button
+                    className="header-settings_button"
+                    onClick = { this.props.toggleSettingsModule }
+                    children={"Settings"}
+                />
                 <Settings />
             </div>
         );

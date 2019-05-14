@@ -16,5 +16,9 @@ export default {
     },
     blocksActive: {
         chat: true,
+        settings: false,
     },
+    locale: "Eng",
+    serviceMsg: true,
+    blackList: null,
 }

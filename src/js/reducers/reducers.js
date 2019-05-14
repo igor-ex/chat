@@ -57,6 +57,7 @@ const configReducer = (state = config, action) => {
         case constants.TOGGLE_CHAT_MODULE_STORE: return {
             ...state,
             blocksActive: {
+                ...state.blocksActive,
                 chat: !state.blocksActive.chat,
             }
         };
@@ -68,6 +69,13 @@ const configReducer = (state = config, action) => {
                     ...state.modules.chat,
                     status: action.payload
                 }
+            }
+        };
+        case constants.TOGGLE_SETTINGS_MODULE_STORE: return {
+            ...state,
+            blocksActive: {
+                ...state.blocksActive,
+                settings: !state.blocksActive.settings,
             }
         };
         default:
