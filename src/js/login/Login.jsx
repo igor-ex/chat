@@ -17,7 +17,7 @@ export default class Login extends React.Component{
                 <div className="authorization-form">
                     <div id="msgBox" className="msgBox"></div>
                     <label className="authorization-form__header">Authorization</label>
-                    <input id="authLog" type="text" className="authorization-form__input-login" placeholder="Login name" onKeyUp={this.handleEnter} required/>
+                    <input id="authLog" type="text" className="authorization-form__input-login" placeholder="Login name" onKeyUp={this.handleEnter} required autoFocus/>
                         <button id="submitLogin" type = "button" className="authorization-form__confirm-button" onClick={this.props.changeLogState}>Login</button>
                 </div>
             </React.Fragment>

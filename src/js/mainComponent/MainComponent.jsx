@@ -26,6 +26,7 @@ export default class MainComponent extends PureComponent {
             this.props.emitUserName(userName);
         }
         else {
+            authLog.value = '';
             this.renderMsg("Please, enter your login");
         }
     };
