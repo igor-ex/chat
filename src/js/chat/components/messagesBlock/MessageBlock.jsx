@@ -65,8 +65,12 @@ export default class MessageBlock extends Component {
             currentMessage
         }
             = this.props;
+        const bannedUsers = [];
+        const filteredMessages = messages.filter(item => {
+            return !!(bannedUsers.indexOf(item.user) === -1);
+        });
         let prevUser = null;
-        const mElems = messages.map((item, index) => {
+        const mElems = filteredMessages.map((item, index) => {
             const user = item.user && item.user !== prevUser ? <div className="chat__user-name">{item.user}</div> : null;
             prevUser = item.user;
             const messageClasses = ['chat__message'];

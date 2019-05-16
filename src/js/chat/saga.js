@@ -11,9 +11,9 @@ export default function* watchChatSaga() {
     yield takeEvery(constants.TOGGLE_CHAT_MODULE, toggleChatModule);
     ({userName} = yield take(constants.EMIT_USER_NAME));
     console.log('im here after name');
-    //yield takeEvery(constants.INIT_CONNECTION, initConnection);
-    yield fork(initConnection);
-    console.log('after init connection');
+    yield takeEvery(constants.INIT_CONNECTION, initConnection);
+    yield put({type: constants.INIT_CONNECTION});
+    yield takeEvery(constants.EMIT_MESSAGE, emitMessageWorker);
 }
 
 function* toggleChatModule() {
@@ -40,23 +40,18 @@ function* emitMessageWorker (action) {
 
 function* initConnection() {
     console.log('initConnection?');
-    yield takeEvery(constants.EMIT_MESSAGE, emitMessageWorker);
     channel = yield call(createWebSocket);
 
-    while(true) {
-        try {
-            channel = yield call(createWebSocket);
-            console.log('in try after channel yield')
-            while (true) {
-                const eventAction = yield take(channel);
-                console.log('in while');
-                yield put(eventAction);
-            }
-        } finally {
-            console.log('ending in finally');
-            yield delay(1000);
+    while (channel) {
+        console.log('while start');
+        const eventAction = yield take(channel);
+        console.log(eventAction, 'ev action');
+        yield put(eventAction);
+        if (eventAction.type === 'CLOSE') {
+            closeWs();
+            yield delay(2000);
+            yield put({type: constants.INIT_CONNECTION});
         }
-
     }
 }
 
@@ -76,16 +71,20 @@ export function createWebSocket() {
         ws.onclose = () => {
             emitter(actions.setStatus('DISCONNECTED'));
             console.log('ending');
-            //emitter(END);
+            emitter({type: 'CLOSE'});
             console.log('im here');
+            closeWs();
+            console.log('after closing');
             //setInterval(() => emitter({type: constants.INIT_CONNECTION}), 1000);
         };
 
         ws.onmessage = response => {
             const data = JSON.parse(response.data);
+            console.log('receiving data from server', data);
             switch(data.mType){
                 case 'new_message':
                     emitter(actions.messageReceived(data.content.user, data.content.text));
+                    console.log('after emitter');
                     break;
                 case 'message_list':
                     emitter(actions.messageHistoryReceived(data.content));
@@ -106,7 +105,9 @@ export function createWebSocket() {
 }
 
 export function closeWs() {
-    //channel.close();
+    channel.close();
     channel = null;
-
+    ws = null;
+    setTimeout(() => channel = createWebSocket(), 2000);
+    console.log('in closing');
 }
