@@ -3,11 +3,19 @@
 
 .page-wrapper {
   height: 100vh;
-  display: flex;
-  flex-direction: column;
+  //display: flex;
+  //flex-direction: column;
+  display: grid;
+  grid-template-columns: 150px auto;
+  grid-template-rows: 80px auto 100px;
+  grid-template-areas:
+  "header header"
+  "sidebar content"
+  "footer footer";
 
   &__header {
-    display: flex;
+    //display: flex;
+    grid-area: header;
     height: @headerHeight;
     border-bottom: 1px solid white;
     box-sizing: border-box;
@@ -15,13 +23,15 @@
   }
 
   &__footer {
-    display: flex;
+    //display: flex;
+    grid-area: footer;
     height: @footerHeight;
   }
 
   &__content {
     flex: 1;
-    display: flex;
+    //display: flex;
+    display: contents;
   }
 }
 
@@ -32,18 +42,21 @@
     border-bottom: 1px solid white;
     border-right: 1px solid white;
     box-sizing: border-box;
+    grid-area: sidebar;
   }
 
   &__chat {
     flex: 1;
     background-color: grey;
     border-bottom: 1px solid white;
-    display: flex;
-    flex-direction: column;
-    height: 100%;
+    //display: flex;
+    //flex-direction: column;
+    grid-area: content;
+    //height: 100%;
     overflow: hidden;
   }
 }
 .footer {
   overflow: auto;
+  height: 100%;
 }

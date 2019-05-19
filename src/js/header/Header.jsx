@@ -1,7 +1,6 @@
 import React from 'react';
 import PureComponent from '../../base/pureComponent/PureComponent.jsx';
 import './header.less';
-import Settings from './Settings';
 
 export default class Header extends PureComponent {
     render() {
@@ -16,12 +15,9 @@ export default class Header extends PureComponent {
                     <span></span>
                 </a>
                 <div className="header__h2">{this.props.userName ? "Hello, " + this.props.userName : "Hello"}</div>
-                <button
-                    className="header-settings_button"
+                <button className="header-settings_button"
                     onClick = { this.props.toggleSettingsModule }
-                    children={"Settings"}
-                />
-                <Settings />
+                >Settings</button>
             </div>
         );
     }

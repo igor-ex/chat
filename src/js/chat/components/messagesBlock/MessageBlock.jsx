@@ -33,6 +33,7 @@ export default class MessageBlock extends Component {
     }
 
     getSnapshotBeforeUpdate(){
+        console.log('in snapshot');
         let flag = false;
         if (this.ref === null || this.ref.current === null) {
             return null;
@@ -42,12 +43,13 @@ export default class MessageBlock extends Component {
             flag = true;
             console.log(flag);
             console.log(el.scrollHeight - el.scrollTop);
+            console.log('returning something from snapshot');
             return flag;
         }
         return null;
     }
 
-    componentDidUpdate(a, b, flag) {
+    componentDidUpdate(prevProps, prevState, flag) {
         if (this.ref === null || this.ref.current === null) {
             return;
         }
@@ -56,16 +58,18 @@ export default class MessageBlock extends Component {
         if (flag) {
             return;
         }
-        el.scrollTop = el.scrollHeight + 100;
+        el.scrollTop = el.scrollHeight;
     }
 
     render() {
         const {
             messages,
-            currentMessage
+            currentMessage,
+            serviceMsg
         }
             = this.props;
         const bannedUsers = [];
+        !serviceMsg && bannedUsers.push('system');//не показывать системные сообщения
         const filteredMessages = messages.filter(item => {
             return !!(bannedUsers.indexOf(item.user) === -1);
         });

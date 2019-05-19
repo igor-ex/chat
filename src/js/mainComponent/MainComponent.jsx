@@ -6,6 +6,7 @@ import Chat from '../chat/index.jsx';
 import Footer from '../footer/index.jsx';
 import './mainComponent.less';
 import Login from "../login/Login";
+import Settings from "../header/Settings";
 
 export default class MainComponent extends PureComponent {
     constructor(props) {
@@ -66,6 +67,7 @@ export default class MainComponent extends PureComponent {
                         {modules.chat.isExisted && <Chat/>}
                     </div> : null
                 }
+                {blocksActive.settings && modules.settings.isExisted && <Settings/>}
                 </main>
                 <footer className="page-wrapper__footer">
                     {modules.footer.isExisted && <Footer/>}

@@ -78,6 +78,10 @@ const configReducer = (state = config, action) => {
                 settings: !state.blocksActive.settings,
             }
         };
+        case constants.TOGGLE_SERVICE_MSG_STORE: return {
+            ...state,
+            serviceMsg: !state.serviceMsg
+        };
         default:
             return state
     }

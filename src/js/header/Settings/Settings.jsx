@@ -3,8 +3,10 @@ import './Setting.less';
 
 export default class Settings extends Component {
 
-
     render() {
+        const {
+            serviceMsg
+        } = this.props;
         return (
             <div className="header-settings_wrapper">
 
@@ -22,8 +24,13 @@ export default class Settings extends Component {
                     />
                     </div>
                     <div className="container-toggler">
-                    <span className="modalWindow_span">Server msg</span>
-                    <input type="checkbox" className="modalWindow_toggler" />
+                    <label className="modalWindow_span" for="modalWindow_toggler">Server msg</label>
+                    <input type="checkbox"
+                           className="modalWindow_toggler"
+                           checked={serviceMsg}
+                           onChange={this.props.toggleServiceMsg}
+                           id="modalWindow_toggler"
+                    />
                     </div>
                     <div className="container-list">
                     <input
@@ -32,12 +39,8 @@ export default class Settings extends Component {
                     <input type="checkbox" className="modalWindow_blacklistCheckbox" />
                     </div>
                     <div className="container-button__choice">
-                        <button
-                            className="modalWindow_buttonChoice"
-                        >Ok</button>
-                        <button
-                            className="modalWindow_buttonChoice"
-                        >Close</button>
+                        <button className="modalWindow_buttonChoice"
+                                onClick={this.props.toggleSettingsModule}>Close</button>
                     </div>
                 </div>
             </div>

@@ -13,6 +13,9 @@ export default {
         footer: {
             isExisted: true,
         },
+        settings: {
+            isExisted: true
+        }
     },
     blocksActive: {
         chat: true,
