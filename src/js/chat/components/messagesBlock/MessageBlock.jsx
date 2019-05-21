@@ -58,7 +58,8 @@ export default class MessageBlock extends Component {
         if (flag) {
             return;
         }
-        el.scrollTop = el.scrollHeight;
+        setTimeout(() => el.scrollTop = el.scrollHeight, 100);
+        //el.scrollTop = el.scrollHeight;
     }
 
     render() {

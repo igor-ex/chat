@@ -3,12 +3,19 @@ import './Setting.less';
 
 export default class Settings extends Component {
 
+    handleClick = (ev) => {
+        if (ev.target !== ev.currentTarget) {
+            return;
+        }
+        this.props.toggleSettingsModule();
+    };
+
     render() {
         const {
             serviceMsg
         } = this.props;
         return (
-            <div className="header-settings_wrapper">
+            <div className="header-settings_wrapper" onClick={this.handleClick}>
 
                 <div className="header-settings_modalWindow">
                     <div className="container-button">
