@@ -53,6 +53,7 @@ const messageReducer = (state = messages, action) => {
 };
 
 const configReducer = (state = config, action) => {
+    console.log('reducer working', action);
     switch (action.type) {
         case constants.TOGGLE_CHAT_MODULE_STORE: return {
             ...state,

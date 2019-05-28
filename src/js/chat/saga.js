@@ -42,7 +42,7 @@ function* initConnection() {
     console.log('initConnection?');
     channel = yield call(createWebSocket);
 
-    while (channel) {
+    while (true) {
         console.log('while start');
         const eventAction = yield take(channel);
         console.log(eventAction, 'ev action');
@@ -50,7 +50,8 @@ function* initConnection() {
         if (eventAction.type === 'CLOSE') {
             closeWs();
             yield delay(2000);
-            yield put({type: constants.INIT_CONNECTION});
+            //yield put({type: constants.INIT_CONNECTION});
+            channel = yield call(createWebSocket);
         }
     }
 }
@@ -73,7 +74,6 @@ export function createWebSocket() {
             console.log('ending');
             emitter({type: 'CLOSE'});
             console.log('im here');
-            closeWs();
             console.log('after closing');
             //setInterval(() => emitter({type: constants.INIT_CONNECTION}), 1000);
         };

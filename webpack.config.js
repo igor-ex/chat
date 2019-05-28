@@ -10,7 +10,8 @@ module.exports = {
   output: {
     path: path.join(__dirname, outputDirectory),
     //path: path.resolve(__dirname, 'dist'),
-    filename: 'bundle.js'
+    filename: 'bundle.js',
+    sourceMapFilename: "bundle.js.map"
   },
   module: {
     rules: [
