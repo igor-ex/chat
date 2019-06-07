@@ -24,7 +24,7 @@ export default class MainComponent extends PureComponent {
         const authLog = this.logInputRef.current;
         const userName = authLog.value.trim();
         if (userName !== ""){
-            this.setState({logState : true, userName : authLog.value, msg: ''});
+            this.setState(() => ({logState : true, userName : authLog.value, msg: ''}));
             this.props.emitUserName(userName);
         }
         else {
