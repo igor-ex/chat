@@ -1,5 +1,5 @@
 import { connect } from 'react-redux';
-import Component from './MainComponent.jsx';
+import MainComponent from './MainComponent.jsx';
 import * as actions from './actions';
 
 const mapStateToProps = state => ({
@@ -12,4 +12,4 @@ const mapDispatchToProps = dispatch => ({
     emitUserName: (userName) => dispatch(actions.emitUserName(userName))
 });
 
-export default connect(mapStateToProps, mapDispatchToProps)(Component);
+export default connect(mapStateToProps, mapDispatchToProps)(MainComponent);

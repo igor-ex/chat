@@ -6,7 +6,7 @@ export default class Header extends PureComponent {
     render() {
         return (
             <div className="header">
-                <a className="chat-header" href="http://localhost:3000">Group Chat
+                <a className="chat-header" href="http://localhost:3000" target="_blank">Group Chat
                     <span></span>
                     <span></span>
                     <span></span>
